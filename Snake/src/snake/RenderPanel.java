@@ -66,6 +66,8 @@ public class RenderPanel extends JPanel
 			String s5;
 			/** zmienna do przechowywania wyœwietlanego tekstu */
 			String s6;
+			/** zmienna do przechowywania wyœwietlanego tekstu */
+			String s7;
 			s0="Zbieraj czerwone jab³ka by byæ coraz d³u¿szym, i zdobywaæ coraz wiêcej punktów. Nie uderz w swój ogon, ani kraniec mapy.";
 			s1="sterowanie:";
 			s2="a lub strza³ka w lewo-kieruje wê¿a w lewo";
@@ -73,7 +75,7 @@ public class RenderPanel extends JPanel
 			s4="d lub strza³ka w prawo-kieruje wê¿a w prawo";
 			s5="w lub strza³ka w górê-kieruje wê¿a w górê";
 			s6="spacja-pauza";
-
+			s7="n-poka¿ statystyki najlepszych graczy";
 			
 			g.drawString(stan_gry, (int) (getWidth() / 2 - stan_gry.length() * 2.5), wysokosc_zero);
 			wysokosc_zero=wysokosc_zero+zmiana_wysokosci;
@@ -90,6 +92,8 @@ public class RenderPanel extends JPanel
 			g.drawString(s5, (int) (getWidth() / 2 - s5.length() * 2.5), wysokosc_zero);
 			wysokosc_zero=wysokosc_zero+zmiana_wysokosci;
 			g.drawString(s6, (int) (getWidth() / 2 - s6.length() * 2.5), wysokosc_zero);
+			wysokosc_zero=wysokosc_zero+zmiana_wysokosci;
+			g.drawString(s7, (int) (getWidth() / 2 - s7.length() * 2.5), wysokosc_zero);
 		}
 	}
 }

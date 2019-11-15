@@ -9,7 +9,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Random;
-
 import javax.swing.JFrame;
 import javax.swing.Timer;
 /** domyœlny  klasa do gry w Snake*/
@@ -62,6 +61,10 @@ public class Snake implements ActionListener, KeyListener
 	/** rozmiary ekranu */
 	public Dimension Dimension;
 /** domyœlny konstruktor klasy Snake, ustawiaj¹cy wyœwietlane okno i uruchamiaj¹cy grê*/
+	Ranking ranking=new Ranking();
+	/** czy pokazaæ ranking */
+	public boolean pokaz_ranking=false;
+
 	public Snake()
 	{
 		Dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -207,27 +210,43 @@ public class Snake implements ActionListener, KeyListener
 	{
 		int i = e.getKeyCode();
 
-		if ((i == KeyEvent.VK_A || i == KeyEvent.VK_LEFT) && kierunek != prawo)
+		if ((i == KeyEvent.VK_A || i == KeyEvent.VK_LEFT) && kierunek != prawo)//je¿eli klikniêto przycisk a lub strza³kê w lewo,  jedonczeœnie w¹¿ nie porusza siê w prawo
 		{
-			kierunek = lewo;
+			kierunek = lewo;//zmieñ kierunek na lewo
 		}
 
-		if ((i == KeyEvent.VK_D || i == KeyEvent.VK_RIGHT) && kierunek != lewo)
+		if ((i == KeyEvent.VK_D || i == KeyEvent.VK_RIGHT) && kierunek != lewo)//analogicznie jak wy¿ej
 		{
-			kierunek = prawo;
+			kierunek = prawo;//analogicznie jak wy¿ej
 		}
 
-		if ((i == KeyEvent.VK_W || i == KeyEvent.VK_UP) && kierunek != dol)
+		if ((i == KeyEvent.VK_W || i == KeyEvent.VK_UP) && kierunek != dol)//analogicznie jak wy¿ej
 		{
-			kierunek = Gora;
+			kierunek = Gora;//analogicznie jak wy¿ej
 		}
 
-		if ((i == KeyEvent.VK_S || i == KeyEvent.VK_DOWN) && kierunek != Gora)
+		if ((i == KeyEvent.VK_S || i == KeyEvent.VK_DOWN) && kierunek != Gora)//analogicznie jak wy¿ej
 		{
-			kierunek = dol;
+			kierunek = dol;//analogicznie jak wy¿ej
 		}
+		if (i == KeyEvent.VK_N )
+		{
+			pokaz_ranking=!pokaz_ranking;
+			if (pokaz_ranking) 
+			{
+				ranking.setVisible(true);
+				Pauza=true;
+				pokaz_ranking=!pokaz_ranking;
+			}
+			else
+			{
+				ranking.setVisible(false);				
+				Pauza=false;
+			}
+		}
+		
 
-		if (i == KeyEvent.VK_SPACE)
+		if (i == KeyEvent.VK_SPACE)//jeœli wciœniêto spacje
 		{
 			if (koniec)
 			{
@@ -235,7 +254,7 @@ public class Snake implements ActionListener, KeyListener
 			}
 			else
 			{
-				Pauza = !Pauza;
+				Pauza = !Pauza;//zmieñ stan pauzy na przeciwny
 			}
 		}
 	}
