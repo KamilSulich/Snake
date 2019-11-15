@@ -30,7 +30,7 @@ public class Snake implements ActionListener, KeyListener
 	public Random random;
 	public boolean koniec, Pauza;
 	public Dimension Dimension;
-
+/**konstruktor klasy hahahahaha*/
 	public Snake()
 	{
 		Dimension = Toolkit.getDefaultToolkit().getScreenSize();
