@@ -28,9 +28,9 @@ public class Snake implements ActionListener, KeyListener
 
 	public static final int Gora = 0, dol = 1, lewo = 2, prawo = 3, skala = 10;
 
-	public int ile_tykniec_zegara = 0, direction = dol, score, tailLength, time;
+	public int ile_tykniec_zegara = 0, kierunek = dol, punkty, Dlugosc_weza;
 
-	public Point head, cherry;
+	public Point glowa, Jablko;
 
 	public Random random;
 
@@ -56,15 +56,14 @@ public class Snake implements ActionListener, KeyListener
 	{
 		over = false;
 		paused = false;
-		time = 0;
-		score = 0;
-		tailLength = 1;
+		punkty = 0;
+		Dlugosc_weza = 0;
 		ile_tykniec_zegara = 0;
-		direction = dol;
-		head = new Point(0, 0);
+		kierunek = dol;
+		glowa = new Point(0, 0);
 		random = new Random();
 		CialoWeza.clear();
-		cherry = new Point(random.nextInt(79), random.nextInt(66));
+		Jablko = new Point(random.nextInt(79), random.nextInt(66));
 		timer.setDelay(20);
 		timer.start();
 	}
@@ -77,15 +76,14 @@ public class Snake implements ActionListener, KeyListener
 
 		if (ile_tykniec_zegara % 2 == 0 && !over && !paused)
 		{
-			time++;
 
-			CialoWeza.add(new Point(head.x, head.y));
+			CialoWeza.add(new Point(glowa.x, glowa.y));
 
-			if (direction == Gora)
+			if (kierunek == Gora)
 			{
-				if (head.y - 1 >= 0 && noTailAt(head.x, head.y - 1))
+				if (glowa.y - 1 >= 0 && noTailAt(glowa.x, glowa.y - 1))
 				{
-					head = new Point(head.x, head.y - 1);
+					glowa = new Point(glowa.x, glowa.y - 1);
 				}
 				else
 				{
@@ -94,11 +92,11 @@ public class Snake implements ActionListener, KeyListener
 				}
 			}
 
-			if (direction == dol)
+			if (kierunek == dol)
 			{
-				if (head.y + 1 < 67 && noTailAt(head.x, head.y + 1))
+				if (glowa.y + 1 < 67 && noTailAt(glowa.x, glowa.y + 1))
 				{
-					head = new Point(head.x, head.y + 1);
+					glowa = new Point(glowa.x, glowa.y + 1);
 				}
 				else
 				{
@@ -106,11 +104,11 @@ public class Snake implements ActionListener, KeyListener
 				}
 			}
 
-			if (direction == lewo)
+			if (kierunek == lewo)
 			{
-				if (head.x - 1 >= 0 && noTailAt(head.x - 1, head.y))
+				if (glowa.x - 1 >= 0 && noTailAt(glowa.x - 1, glowa.y))
 				{
-					head = new Point(head.x - 1, head.y);
+					glowa = new Point(glowa.x - 1, glowa.y);
 				}
 				else
 				{
@@ -118,11 +116,11 @@ public class Snake implements ActionListener, KeyListener
 				}
 			}
 
-			if (direction == prawo)
+			if (kierunek == prawo)
 			{
-				if (head.x + 1 < 80 && noTailAt(head.x + 1, head.y))
+				if (glowa.x + 1 < 80 && noTailAt(glowa.x + 1, glowa.y))
 				{
-					head = new Point(head.x + 1, head.y);
+					glowa = new Point(glowa.x + 1, glowa.y);
 				}
 				else
 				{
@@ -130,20 +128,20 @@ public class Snake implements ActionListener, KeyListener
 				}
 			}
 
-			if (CialoWeza.size() > tailLength)
+			if (CialoWeza.size() > Dlugosc_weza)
 			{
 				CialoWeza.remove(0);
 
 			}
 
-			if (cherry != null)
+			if (Jablko != null)
 			{
-				if (head.equals(cherry))
+				if (glowa.equals(Jablko))
 				{
-					score += 10;
-					tailLength++;
-					cherry.setLocation(random.nextInt(79), random.nextInt(66));
-					timer.setDelay(20/tailLength);
+					punkty += 10;
+					Dlugosc_weza++;
+					Jablko.setLocation(random.nextInt(79), random.nextInt(66));
+					timer.setDelay(20/Dlugosc_weza);
 				}
 			}
 		}
@@ -171,24 +169,24 @@ public class Snake implements ActionListener, KeyListener
 	{
 		int i = e.getKeyCode();
 
-		if ((i == KeyEvent.VK_A || i == KeyEvent.VK_LEFT) && direction != prawo)
+		if ((i == KeyEvent.VK_A || i == KeyEvent.VK_LEFT) && kierunek != prawo)
 		{
-			direction = lewo;
+			kierunek = lewo;
 		}
 
-		if ((i == KeyEvent.VK_D || i == KeyEvent.VK_RIGHT) && direction != lewo)
+		if ((i == KeyEvent.VK_D || i == KeyEvent.VK_RIGHT) && kierunek != lewo)
 		{
-			direction = prawo;
+			kierunek = prawo;
 		}
 
-		if ((i == KeyEvent.VK_W || i == KeyEvent.VK_UP) && direction != dol)
+		if ((i == KeyEvent.VK_W || i == KeyEvent.VK_UP) && kierunek != dol)
 		{
-			direction = Gora;
+			kierunek = Gora;
 		}
 
-		if ((i == KeyEvent.VK_S || i == KeyEvent.VK_DOWN) && direction != Gora)
+		if ((i == KeyEvent.VK_S || i == KeyEvent.VK_DOWN) && kierunek != Gora)
 		{
-			direction = dol;
+			kierunek = dol;
 		}
 
 		if (i == KeyEvent.VK_SPACE)

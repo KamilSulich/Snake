@@ -30,13 +30,13 @@ public class RenderPanel extends JPanel
 			g.fillRect(point.x * Snake.skala, point.y * Snake.skala, Snake.skala, Snake.skala);
 		}
 		
-		g.fillRect(snake.head.x * Snake.skala, snake.head.y * Snake.skala, Snake.skala, Snake.skala);
+		g.fillRect(snake.glowa.x * Snake.skala, snake.glowa.y * Snake.skala, Snake.skala, Snake.skala);
 		
 		g.setColor(Color.RED);
 		
-		g.fillRect(snake.cherry.x * Snake.skala, snake.cherry.y * Snake.skala, Snake.skala, Snake.skala);
+		g.fillRect(snake.Jablko.x * Snake.skala, snake.Jablko.y * Snake.skala, Snake.skala, Snake.skala);
 		
-		String string = "Score: " + snake.score + ", Length: " + snake.tailLength + ", Time: " + snake.time / 20;
+		String string = "punkty: " + snake.punkty + ", D³ugoœæ wê¿a: " + snake.Dlugosc_weza;
 		
 		g.setColor(Color.white);
 		
