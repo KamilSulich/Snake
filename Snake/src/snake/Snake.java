@@ -24,11 +24,11 @@ public class Snake implements ActionListener, KeyListener
 
 	public Timer timer = new Timer(20, this);
 
-	public ArrayList<Point> snakeParts = new ArrayList<Point>();
+	public ArrayList<Point> CialoWeza = new ArrayList<Point>();
 
-	public static final int UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3, SCALE = 10;
+	public static final int Gora = 0, dol = 1, lewo = 2, prawo = 3, skala = 10;
 
-	public int ticks = 0, direction = DOWN, score, tailLength, time;
+	public int ile_tykniec_zegara = 0, direction = dol, score, tailLength, time;
 
 	public Point head, cherry;
 
@@ -43,7 +43,7 @@ public class Snake implements ActionListener, KeyListener
 		dim = Toolkit.getDefaultToolkit().getScreenSize();
 		jframe = new JFrame("Snake");
 		jframe.setVisible(true);
-		jframe.setSize(805, 700);
+		jframe.setSize(810, 710);
 		jframe.setResizable(false);
 		jframe.setLocation(dim.width / 2 - jframe.getWidth() / 2, dim.height / 2 - jframe.getHeight() / 2);
 		jframe.add(renderPanel = new RenderPanel());
@@ -58,13 +58,14 @@ public class Snake implements ActionListener, KeyListener
 		paused = false;
 		time = 0;
 		score = 0;
-		tailLength = 10;
-		ticks = 0;
-		direction = DOWN;
+		tailLength = 1;
+		ile_tykniec_zegara = 0;
+		direction = dol;
 		head = new Point(0, 0);
 		random = new Random();
-		snakeParts.clear();
+		CialoWeza.clear();
 		cherry = new Point(random.nextInt(79), random.nextInt(66));
+		timer.setDelay(20);
 		timer.start();
 	}
 
@@ -72,15 +73,15 @@ public class Snake implements ActionListener, KeyListener
 	public void actionPerformed(ActionEvent arg0)
 	{
 		renderPanel.repaint();
-		ticks++;
+		ile_tykniec_zegara++;
 
-		if (ticks % 2 == 0 && !over && !paused)
+		if (ile_tykniec_zegara % 2 == 0 && !over && !paused)
 		{
 			time++;
 
-			snakeParts.add(new Point(head.x, head.y));
+			CialoWeza.add(new Point(head.x, head.y));
 
-			if (direction == UP)
+			if (direction == Gora)
 			{
 				if (head.y - 1 >= 0 && noTailAt(head.x, head.y - 1))
 				{
@@ -93,7 +94,7 @@ public class Snake implements ActionListener, KeyListener
 				}
 			}
 
-			if (direction == DOWN)
+			if (direction == dol)
 			{
 				if (head.y + 1 < 67 && noTailAt(head.x, head.y + 1))
 				{
@@ -105,7 +106,7 @@ public class Snake implements ActionListener, KeyListener
 				}
 			}
 
-			if (direction == LEFT)
+			if (direction == lewo)
 			{
 				if (head.x - 1 >= 0 && noTailAt(head.x - 1, head.y))
 				{
@@ -117,7 +118,7 @@ public class Snake implements ActionListener, KeyListener
 				}
 			}
 
-			if (direction == RIGHT)
+			if (direction == prawo)
 			{
 				if (head.x + 1 < 80 && noTailAt(head.x + 1, head.y))
 				{
@@ -129,9 +130,9 @@ public class Snake implements ActionListener, KeyListener
 				}
 			}
 
-			if (snakeParts.size() > tailLength)
+			if (CialoWeza.size() > tailLength)
 			{
-				snakeParts.remove(0);
+				CialoWeza.remove(0);
 
 			}
 
@@ -142,6 +143,7 @@ public class Snake implements ActionListener, KeyListener
 					score += 10;
 					tailLength++;
 					cherry.setLocation(random.nextInt(79), random.nextInt(66));
+					timer.setDelay(20/tailLength);
 				}
 			}
 		}
@@ -149,7 +151,7 @@ public class Snake implements ActionListener, KeyListener
 
 	public boolean noTailAt(int x, int y)
 	{
-		for (Point point : snakeParts)
+		for (Point point : CialoWeza)
 		{
 			if (point.equals(new Point(x, y)))
 			{
@@ -169,24 +171,24 @@ public class Snake implements ActionListener, KeyListener
 	{
 		int i = e.getKeyCode();
 
-		if ((i == KeyEvent.VK_A || i == KeyEvent.VK_LEFT) && direction != RIGHT)
+		if ((i == KeyEvent.VK_A || i == KeyEvent.VK_LEFT) && direction != prawo)
 		{
-			direction = LEFT;
+			direction = lewo;
 		}
 
-		if ((i == KeyEvent.VK_D || i == KeyEvent.VK_RIGHT) && direction != LEFT)
+		if ((i == KeyEvent.VK_D || i == KeyEvent.VK_RIGHT) && direction != lewo)
 		{
-			direction = RIGHT;
+			direction = prawo;
 		}
 
-		if ((i == KeyEvent.VK_W || i == KeyEvent.VK_UP) && direction != DOWN)
+		if ((i == KeyEvent.VK_W || i == KeyEvent.VK_UP) && direction != dol)
 		{
-			direction = UP;
+			direction = Gora;
 		}
 
-		if ((i == KeyEvent.VK_S || i == KeyEvent.VK_DOWN) && direction != UP)
+		if ((i == KeyEvent.VK_S || i == KeyEvent.VK_DOWN) && direction != Gora)
 		{
-			direction = DOWN;
+			direction = dol;
 		}
 
 		if (i == KeyEvent.VK_SPACE)
