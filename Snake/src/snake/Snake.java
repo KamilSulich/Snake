@@ -12,7 +12,7 @@ import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.Timer;
-
+/** domyœlny  klasa do gry w Snake*/
 public class Snake implements ActionListener, KeyListener
 {
 
@@ -21,6 +21,7 @@ public class Snake implements ActionListener, KeyListener
 	public RenderPanel renderPanel;
 	public Timer timer = new Timer(20, this);
 	public ArrayList<Point> CialoWeza = new ArrayList<Point>();
+	/** maksymalna wspó³rzêdna po przekroczeniu której w¹¿ walnie g³ow¹ w œcianê */
 	public int max_x=80;//maksymalna wspó³rzêdna po przekroczeniu której w¹¿ walnie g³ow¹ w œcianê 
 	public int max_y=67;//maksymalna wspó³rzêdna po przekroczeniu której w¹¿ walnie g³ow¹ w œcianê 
 	public static final int Gora = 0, dol = 1, lewo = 2, prawo = 3, skala = 10;
@@ -28,9 +29,9 @@ public class Snake implements ActionListener, KeyListener
 	public int zmiana_dlugosci=1;
 	public Point glowa, Jablko;
 	public Random random;
-	public boolean koniec, Pauza;
+	public boolean koniec, Pauza=false,czy_pierwsze_odpalenie=true;
 	public Dimension Dimension;
-/**konstruktor klasy hahahahaha*/
+/** domyœlny konstruktor klasy Snake, ustawiaj¹cy wyœwietlane okno i uruchamiaj¹cy grê*/
 	public Snake()
 	{
 		Dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -42,13 +43,16 @@ public class Snake implements ActionListener, KeyListener
 		jframe.add(renderPanel = new RenderPanel());
 		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jframe.addKeyListener(this);
-		startGame();
+		UruchomGre();
 	}
-
-	public void startGame()
+	/** Metoda uruchamiaj¹ca grê*/
+	public void UruchomGre()
 	{
 		koniec = false;
-		Pauza = false;
+		if (czy_pierwsze_odpalenie)
+		{
+		Pauza = true;
+		}
 		punkty = 0;
 		Dlugosc_weza = 0;
 		kierunek = dol;
@@ -59,7 +63,7 @@ public class Snake implements ActionListener, KeyListener
 		timer.setDelay(40);
 		timer.start();
 	}
-
+	/** Metoda uruchamiaj¹ca siê co takt zegara timer. G³ówny mechanizm gry.*/
 	@Override
 	public void actionPerformed(ActionEvent arg0)
 	{
@@ -79,6 +83,7 @@ public class Snake implements ActionListener, KeyListener
 				else
 				{
 					koniec = true;
+					czy_pierwsze_odpalenie=false;
 
 				}
 			}
@@ -92,6 +97,8 @@ public class Snake implements ActionListener, KeyListener
 				else
 				{
 					koniec = true;
+					czy_pierwsze_odpalenie=false;
+
 				}
 			}
 
@@ -104,6 +111,8 @@ public class Snake implements ActionListener, KeyListener
 				else
 				{
 					koniec = true;
+					czy_pierwsze_odpalenie=false;
+
 				}
 			}
 
@@ -116,6 +125,7 @@ public class Snake implements ActionListener, KeyListener
 				else
 				{
 					koniec = true;
+					czy_pierwsze_odpalenie=false;
 				}
 			}
 
@@ -136,7 +146,12 @@ public class Snake implements ActionListener, KeyListener
 			
 		}
 	}
-
+	
+	/** Metoda sprawdzaj¹ca czy pod punktem o wspó³rzêdnych x,y jest ogon wê¿a. Jeœli jest, zwraca false, w przeciwnym wypadku zwraca true
+	 *@return False je¿eli w punkcie jest ogon, true je¿eli go nie ma
+	 *@param x wspó³rzêdna x sprawdzanego punktu
+	 *@param y wspó³rzêdna y sprawdzanego punktu
+	 */
 	public boolean BrakOgona(int x, int y)
 	{
 		for (Point point : CialoWeza)
@@ -148,12 +163,15 @@ public class Snake implements ActionListener, KeyListener
 		}
 		return true;
 	}
-
+	/** Metoda Main, uruchamiaj¹ca program 
+	 *@param args argumenty uruchomienia programu
+	 * */
 	public static void main(String[] args)
 	{
 		snake = new Snake();
 	}
 
+	/** Metoda sprawdzaj¹ca jaki klawisz jest wciœniêty */
 	@Override
 	public void keyPressed(KeyEvent e)
 	{
@@ -183,7 +201,7 @@ public class Snake implements ActionListener, KeyListener
 		{
 			if (koniec)
 			{
-				startGame();
+				UruchomGre();
 			}
 			else
 			{
@@ -193,12 +211,12 @@ public class Snake implements ActionListener, KeyListener
 	}
 
 	@Override
-	public void keyReleased(KeyEvent e)
+	public void keyReleased(KeyEvent e)//ta metoda musi zostaæ, by nie wyœwietla³y siê wyj¹tki po kompilacji
 	{
 	}
 
 	@Override
-	public void keyTyped(KeyEvent e)
+	public void keyTyped(KeyEvent e)//ta metoda musi zostaæ, by nie wyœwietla³y siê wyj¹tki po kompilacji
 	{
 	}
 
