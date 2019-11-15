@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 public class RenderPanel extends JPanel
 {
 
-	public static final Color GREEN = new Color(1666073);
+	//public static final Color GREEN = new Color(1666073);
 
 	@Override
 	protected void paintComponent(Graphics g)
@@ -23,13 +23,13 @@ public class RenderPanel extends JPanel
 		
 		g.fillRect(0, 0, 800, 700);
 
-		g.setColor(Color.GREEN);
+		g.setColor(Color.green);
 
 		for (Point point : snake.CialoWeza)
 		{
 			g.fillRect(point.x * Snake.skala, point.y * Snake.skala, Snake.skala, Snake.skala);
 		}
-		
+		g.setColor(Color.BLUE);
 		g.fillRect(snake.glowa.x * Snake.skala, snake.glowa.y * Snake.skala, Snake.skala, Snake.skala);
 		
 		g.setColor(Color.RED);
@@ -44,16 +44,16 @@ public class RenderPanel extends JPanel
 
 		string = "Koniec Gry! Wciœnij spacje, by zagraæ jeszcze raz";
 
-		if (snake.over)
+		if (snake.koniec)
 		{
-			g.drawString(string, (int) (getWidth() / 2 - string.length() * 2.5f), (int) snake.dim.getHeight() / 4);
+			g.drawString(string, (int) (getWidth() / 2 - string.length() * 2.5f), (int) snake.Dimension.getHeight() / 4);
 		}
 
 		string = "Gra zapauzowana, wciœnij ponownie spacje, by graæ dalej";
 
-		if (snake.paused && !snake.over)
+		if (snake.Pauza && !snake.koniec)
 		{
-			g.drawString(string, (int) (getWidth() / 2 - string.length() * 2.5f), (int) snake.dim.getHeight() / 4);
+			g.drawString(string, (int) (getWidth() / 2 - string.length() * 2.5f), (int) snake.Dimension.getHeight() / 4);
 		}
 	}
 }
