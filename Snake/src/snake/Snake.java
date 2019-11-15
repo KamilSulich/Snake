@@ -61,7 +61,6 @@ public class Snake implements ActionListener, KeyListener
 	/** rozmiary ekranu */
 	public Dimension Dimension;
 /** domyœlny konstruktor klasy Snake, ustawiaj¹cy wyœwietlane okno i uruchamiaj¹cy grê*/
-	Ranking ranking=new Ranking();
 	/** czy pokazaæ ranking */
 	public boolean pokaz_ranking=false;
 
@@ -172,9 +171,9 @@ public class Snake implements ActionListener, KeyListener
 				if (glowa.equals(Jablko))
 				{
 					punkty ++;
-					Dlugosc_ogonu=Dlugosc_ogonu+zmiana_dlugosci;
+					Dlugosc_ogonu=Dlugosc_ogonu+punkty;//+zmiana_dlugosci;//w ten sposób im wiêcej bêdziemy mieæ punktów, tym szybciej bêdzie rosn¹æ ogon
 					Jablko.setLocation(random.nextInt(max_x), random.nextInt(max_y));//
-					//timer.setDelay(20/Dlugosc_ogonu);
+					//timer.setDelay(20/Dlugosc_ogonu);//odkomentowanie tej linii sprawi ¿e wa¿ bêdzie coraz szybciej pe³zaæ
 				}
 			
 		}
@@ -234,13 +233,11 @@ public class Snake implements ActionListener, KeyListener
 			pokaz_ranking=!pokaz_ranking;
 			if (pokaz_ranking) 
 			{
-				ranking.setVisible(true);
 				Pauza=true;
 				pokaz_ranking=!pokaz_ranking;
 			}
 			else
 			{
-				ranking.setVisible(false);				
 				Pauza=false;
 			}
 		}
