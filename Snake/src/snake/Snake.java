@@ -25,9 +25,9 @@ public class Snake implements ActionListener, KeyListener
 	public Timer timer = new Timer(20, this);
 	/** lista punktów o wspó³rzêdnych x,y na których jest ogon wê¿a */
 	public ArrayList<Point> OgonWeza = new ArrayList<Point>();
-	/** maksymalna wspó³rzêdna x po przekroczeniu której w¹¿ walnie g³ow¹ w œcianê */
+	/** maksymalna wspó³rzêdna x po przekroczeniu której w¹¿ uderzy g³ow¹ w œcianê */
 	public int max_x=80;
-	/** maksymalna wspó³rzêdna y po przekroczeniu której w¹¿ walnie g³ow¹ w œcianê */
+	/** maksymalna wspó³rzêdna y po przekroczeniu której w¹¿ uderzy g³ow¹ w œcianê */
 	public int max_y=67;
 	/** zmienna definiuj¹ca kierunek */
 	public static final int Gora = 0;
@@ -43,12 +43,23 @@ public class Snake implements ActionListener, KeyListener
 	public int kierunek = dol;
 	/** ile punktów zdoby³ gracz */
 	public int punkty;
-	
+	/**jak d³ugi jest ogon */
 	public int	Dlugosc_ogonu;
+	/**o ile ma wyd³u¿aæ siê ogon, gdy w¹¿ zje jab³ko */
 	public int zmiana_dlugosci=1;
-	public Point glowa, Jablko;
+	/**Gdzie jest g³owa */
+	public Point glowa;
+	/**Gdzie jest Jablko */
+	public Point Jablko;
+	/**Zmienna do losowania wspó³rzêdnych punktów */
 	public Random random;
-	public boolean koniec, Pauza=false,czy_pierwsze_odpalenie=true;
+	/** zmienna zwracaj¹ca true je¿eli gracz przegra³, a jeœli nie to false*/
+	public boolean koniec;
+	/** czy gra jest zapauzowana*/
+	public boolean Pauza=false;
+	/**Czy to pierwsza rozgrywka od uruchomienia programu */
+	public boolean czy_pierwsze_odpalenie=true;
+	/** rozmiary ekranu */
 	public Dimension Dimension;
 /** domyœlny konstruktor klasy Snake, ustawiaj¹cy wyœwietlane okno i uruchamiaj¹cy grê*/
 	public Snake()
@@ -228,14 +239,14 @@ public class Snake implements ActionListener, KeyListener
 			}
 		}
 	}
-
+	/** ta metoda musi zostaæ, by nie wyœwietla³y siê wyj¹tki po kompilacji */
 	@Override
-	public void keyReleased(KeyEvent e)//ta metoda musi zostaæ, by nie wyœwietla³y siê wyj¹tki po kompilacji
+	public void keyReleased(KeyEvent e)
 	{
 	}
-
+	/** ta metoda musi zostaæ, by nie wyœwietla³y siê wyj¹tki po kompilacji */
 	@Override
-	public void keyTyped(KeyEvent e)//ta metoda musi zostaæ, by nie wyœwietla³y siê wyj¹tki po kompilacji
+	public void keyTyped(KeyEvent e)
 	{
 	}
 

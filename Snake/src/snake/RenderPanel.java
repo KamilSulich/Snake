@@ -13,7 +13,8 @@ public class RenderPanel extends JPanel
 	@Override
 	protected void paintComponent(Graphics g)
 	{
-		super.paintComponent(g);	
+		super.paintComponent(g);
+		/** zmienna typu snake */
 		Snake snake = Snake.snake;
 		g.setColor(Color.black);
 		g.fillRect(0, 0, 800, 700);
@@ -30,10 +31,12 @@ public class RenderPanel extends JPanel
 		g.setColor(Color.RED);		
 		g.fillRect(snake.Jablko.x * Snake.skala, snake.Jablko.y * Snake.skala, Snake.skala, Snake.skala);
 		
+		/** wyœwietla na bierz¹co statystyki gry */
 		String Statystyki = "punkty: " + snake.punkty + ", D³ugoœæ ogonu: " + snake.Dlugosc_ogonu;		
 		g.setColor(Color.white);		
 		g.drawString(Statystyki, (int) (getWidth() / 2 - Statystyki.length() * 2.5), 10);
 
+		/** zmienna okreslaj¹ca czy jest pauza lub koniec gry */
 		String stan_gry;
 		if (snake.koniec)
 		{
@@ -44,10 +47,25 @@ public class RenderPanel extends JPanel
 
 		if (snake.Pauza && !snake.koniec)
 		{
+			/** okreœla wysokoœæ na jakiej ma siê pojawiæ pierwsza linia tekstu */
 			int wysokosc_zero= (int) snake.Dimension.getHeight()/4;
+			/** okreœla odstêp miêdzy liniami tekstu */
 			int zmiana_wysokosci=(int)20;
 			stan_gry = "Gra zapauzowana, wciœnij spacje, by graæ dalej.";
-			String s0,s1,s2,s3,s4,s5,s6;
+			/** zmienna do przechowywania wyœwietlanego tekstu */
+			String s0;
+			/** zmienna do przechowywania wyœwietlanego tekstu */
+			String s1;
+			/** zmienna do przechowywania wyœwietlanego tekstu */
+			String s2;
+			/** zmienna do przechowywania wyœwietlanego tekstu */
+			String s3;
+			/** zmienna do przechowywania wyœwietlanego tekstu */
+			String s4;
+			/** zmienna do przechowywania wyœwietlanego tekstu */
+			String s5;
+			/** zmienna do przechowywania wyœwietlanego tekstu */
+			String s6;
 			s0="Zbieraj czerwone jab³ka by byæ coraz d³u¿szym, i zdobywaæ coraz wiêcej punktów. Nie uderz w swój ogon, ani kraniec mapy.";
 			s1="sterowanie:";
 			s2="a lub strza³ka w lewo-kieruje wê¿a w lewo";
