@@ -19,7 +19,7 @@ public class RenderPanel extends JPanel
 		g.fillRect(0, 0, 800, 700);
 
 		g.setColor(Color.green);
-		for (Point point : snake.CialoWeza)
+		for (Point point : snake.OgonWeza)
 		{
 			g.fillRect(point.x * Snake.skala, point.y * Snake.skala, Snake.skala, Snake.skala);
 		}
@@ -30,7 +30,7 @@ public class RenderPanel extends JPanel
 		g.setColor(Color.RED);		
 		g.fillRect(snake.Jablko.x * Snake.skala, snake.Jablko.y * Snake.skala, Snake.skala, Snake.skala);
 		
-		String Statystyki = "punkty: " + snake.punkty + ", D³ugoœæ wê¿a: " + snake.Dlugosc_weza;		
+		String Statystyki = "punkty: " + snake.punkty + ", D³ugoœæ ogonu: " + snake.Dlugosc_ogonu;		
 		g.setColor(Color.white);		
 		g.drawString(Statystyki, (int) (getWidth() / 2 - Statystyki.length() * 2.5), 10);
 

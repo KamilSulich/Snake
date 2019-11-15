@@ -15,17 +15,36 @@ import javax.swing.Timer;
 /** domyœlny  klasa do gry w Snake*/
 public class Snake implements ActionListener, KeyListener
 {
-
+	/** klasa snake */
 	public static Snake snake;
+	/** obiekt typu Jframe do rysowania w oknie */
 	public JFrame jframe;
+	/** obiekt typu RenderPanel, do rysowania w oknie */
 	public RenderPanel renderPanel;
+	/**Obiekt typu timer, uruchamiajacy co okreslon¹ iloœæ milisekund wydarzenie */
 	public Timer timer = new Timer(20, this);
-	public ArrayList<Point> CialoWeza = new ArrayList<Point>();
-	/** maksymalna wspó³rzêdna po przekroczeniu której w¹¿ walnie g³ow¹ w œcianê */
-	public int max_x=80;//maksymalna wspó³rzêdna po przekroczeniu której w¹¿ walnie g³ow¹ w œcianê 
-	public int max_y=67;//maksymalna wspó³rzêdna po przekroczeniu której w¹¿ walnie g³ow¹ w œcianê 
-	public static final int Gora = 0, dol = 1, lewo = 2, prawo = 3, skala = 10;
-	public int kierunek = dol, punkty, Dlugosc_weza;
+	/** lista punktów o wspó³rzêdnych x,y na których jest ogon wê¿a */
+	public ArrayList<Point> OgonWeza = new ArrayList<Point>();
+	/** maksymalna wspó³rzêdna x po przekroczeniu której w¹¿ walnie g³ow¹ w œcianê */
+	public int max_x=80;
+	/** maksymalna wspó³rzêdna y po przekroczeniu której w¹¿ walnie g³ow¹ w œcianê */
+	public int max_y=67;
+	/** zmienna definiuj¹ca kierunek */
+	public static final int Gora = 0;
+	/** zmienna definiuj¹ca kierunek */
+	public static final int	dol = 1; 
+	/** zmienna definiuj¹ca kierunek */
+	public static final int	lewo = 2;
+	/** zmienna definiuj¹ca kierunek */
+	public static final int	prawo = 3;
+	/** Skala gry, im wiêksza tym wiêskze ,,piksele" */
+	public static final int	skala = 10;
+	/** kierunek poruszania siê wê¿a */
+	public int kierunek = dol;
+	/** ile punktów zdoby³ gracz */
+	public int punkty;
+	
+	public int	Dlugosc_ogonu;
 	public int zmiana_dlugosci=1;
 	public Point glowa, Jablko;
 	public Random random;
@@ -54,11 +73,11 @@ public class Snake implements ActionListener, KeyListener
 		Pauza = true;
 		}
 		punkty = 0;
-		Dlugosc_weza = 0;
+		Dlugosc_ogonu = 0;
 		kierunek = dol;
 		glowa = new Point(0, 0);
 		random = new Random();
-		CialoWeza.clear();
+		OgonWeza.clear();
 		Jablko = new Point(random.nextInt(max_x), random.nextInt(max_y));
 		timer.setDelay(40);
 		timer.start();
@@ -72,7 +91,7 @@ public class Snake implements ActionListener, KeyListener
 		if (!koniec && !Pauza)
 		{
 
-			CialoWeza.add(new Point(glowa.x, glowa.y));
+			OgonWeza.add(new Point(glowa.x, glowa.y));
 
 			if (kierunek == Gora)
 			{
@@ -129,9 +148,9 @@ public class Snake implements ActionListener, KeyListener
 				}
 			}
 
-			if (CialoWeza.size() > Dlugosc_weza)
+			if (OgonWeza.size() > Dlugosc_ogonu)
 			{
-				CialoWeza.remove(0);//bez tej lini waz bedzie rosnac w nieskonczonosc
+				OgonWeza.remove(0);//bez tej lini waz bedzie rosnac w nieskonczonosc
 
 			}
 
@@ -139,9 +158,9 @@ public class Snake implements ActionListener, KeyListener
 				if (glowa.equals(Jablko))
 				{
 					punkty ++;
-					Dlugosc_weza=Dlugosc_weza+zmiana_dlugosci;
+					Dlugosc_ogonu=Dlugosc_ogonu+zmiana_dlugosci;
 					Jablko.setLocation(random.nextInt(max_x), random.nextInt(max_y));//
-					//timer.setDelay(20/Dlugosc_weza);
+					//timer.setDelay(20/Dlugosc_ogonu);
 				}
 			
 		}
@@ -154,7 +173,7 @@ public class Snake implements ActionListener, KeyListener
 	 */
 	public boolean BrakOgona(int x, int y)
 	{
-		for (Point point : CialoWeza)
+		for (Point point : OgonWeza)
 		{
 			if (point.equals(new Point(x, y)))
 			{
