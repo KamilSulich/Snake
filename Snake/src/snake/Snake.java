@@ -17,26 +17,18 @@ public class Snake implements ActionListener, KeyListener
 {
 
 	public static Snake snake;
-
 	public JFrame jframe;
-
 	public RenderPanel renderPanel;
-
 	public Timer timer = new Timer(20, this);
-
 	public ArrayList<Point> CialoWeza = new ArrayList<Point>();
 	public int max_x=80;//maksymalna wspó³rzêdna po przekroczeniu której w¹¿ walnie g³ow¹ w œcianê 
 	public int max_y=67;//maksymalna wspó³rzêdna po przekroczeniu której w¹¿ walnie g³ow¹ w œcianê 
 	public static final int Gora = 0, dol = 1, lewo = 2, prawo = 3, skala = 10;
-
-	public int ile_tykniec_zegara = 0, kierunek = dol, punkty, Dlugosc_weza;
+	public int kierunek = dol, punkty, Dlugosc_weza;
 	public int zmiana_dlugosci=1;
 	public Point glowa, Jablko;
-
 	public Random random;
-
 	public boolean koniec, Pauza;
-
 	public Dimension Dimension;
 
 	public Snake()
@@ -59,13 +51,12 @@ public class Snake implements ActionListener, KeyListener
 		Pauza = false;
 		punkty = 0;
 		Dlugosc_weza = 0;
-		ile_tykniec_zegara = 0;
 		kierunek = dol;
 		glowa = new Point(0, 0);
 		random = new Random();
 		CialoWeza.clear();
 		Jablko = new Point(random.nextInt(max_x), random.nextInt(max_y));
-		timer.setDelay(20);
+		timer.setDelay(40);
 		timer.start();
 	}
 
@@ -73,9 +64,8 @@ public class Snake implements ActionListener, KeyListener
 	public void actionPerformed(ActionEvent arg0)
 	{
 		renderPanel.repaint();
-		ile_tykniec_zegara++;
 
-		if (ile_tykniec_zegara % 2 == 0 && !koniec && !Pauza)
+		if (!koniec && !Pauza)
 		{
 
 			CialoWeza.add(new Point(glowa.x, glowa.y));
@@ -131,7 +121,7 @@ public class Snake implements ActionListener, KeyListener
 
 			if (CialoWeza.size() > Dlugosc_weza)
 			{
-				CialoWeza.remove(0);
+				CialoWeza.remove(0);//bez tej lini waz bedzie rosnac w nieskonczonosc
 
 			}
 
