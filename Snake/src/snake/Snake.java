@@ -25,7 +25,7 @@ public class Snake implements ActionListener, KeyListener
 	public Timer timer = new Timer(20, this);
 
 	public ArrayList<Point> CialoWeza = new ArrayList<Point>();
-	public int max_x=78;//maksymalna wspó³rzêdna po przekroczeniu której w¹¿ walnie g³ow¹ w œcianê 
+	public int max_x=80;//maksymalna wspó³rzêdna po przekroczeniu której w¹¿ walnie g³ow¹ w œcianê 
 	public int max_y=67;//maksymalna wspó³rzêdna po przekroczeniu której w¹¿ walnie g³ow¹ w œcianê 
 	public static final int Gora = 0, dol = 1, lewo = 2, prawo = 3, skala = 10;
 
@@ -44,7 +44,7 @@ public class Snake implements ActionListener, KeyListener
 		Dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		jframe = new JFrame("Gra Snake");
 		jframe.setVisible(true);
-		jframe.setSize(810, 710);
+		jframe.setSize(815, 710);
 		jframe.setResizable(false);
 		jframe.setLocation(Dimension.width / 2 - jframe.getWidth() / 2, Dimension.height / 2 - jframe.getHeight() / 2);
 		jframe.add(renderPanel = new RenderPanel());
@@ -60,8 +60,8 @@ public class Snake implements ActionListener, KeyListener
 		punkty = 0;
 		Dlugosc_weza = 0;
 		ile_tykniec_zegara = 0;
-		kierunek = Gora;
-		glowa = new Point(max_x/2, max_y/2);
+		kierunek = dol;
+		glowa = new Point(0, 0);
 		random = new Random();
 		CialoWeza.clear();
 		Jablko = new Point(random.nextInt(max_x), random.nextInt(max_y));
@@ -135,8 +135,7 @@ public class Snake implements ActionListener, KeyListener
 
 			}
 
-			if (Jablko != null)
-			{
+			
 				if (glowa.equals(Jablko))
 				{
 					punkty ++;
@@ -144,7 +143,7 @@ public class Snake implements ActionListener, KeyListener
 					Jablko.setLocation(random.nextInt(max_x), random.nextInt(max_y));//
 					//timer.setDelay(20/Dlugosc_weza);
 				}
-			}
+			
 		}
 	}
 
